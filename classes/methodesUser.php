@@ -14,9 +14,9 @@ require_once "bdd.classes.php";
             $stmt->bindParam(4, $pwd);
     
             if($stmt->execute()) {
-                $idUtl = $pdo->lastInsertId();
-                session_start();
-                $_SESSION['idUtl'] = $idUtl;
+                // $idUtl = $pdo->lastInsertId();
+                // session_start();
+                // $_SESSION['idUtl'] = $idUtl;
                 header('location:./../pages/role.php');
                 exit();
             } else {
@@ -38,7 +38,7 @@ require_once "bdd.classes.php";
         
                 if ($result) {
                     $role = $result['nomRole'];
-                    session_start();
+                    // session_start();
                     $_SESSION['idUtl'] = $result['idUtl'];
                     $id = $_SESSION['idUtl'];
                     header('location:pages/' . ($role == 'client' ? 'produits.php' : 'admin.php') . '?role=' . $role.$id);
@@ -53,7 +53,7 @@ require_once "bdd.classes.php";
         
     
         public function roleM($role) {
-            session_start();
+            // session_start();
             $idUtl = isset($_SESSION['idUtl']) ? $_SESSION['idUtl'] : null;
     
             if ($idUtl) {

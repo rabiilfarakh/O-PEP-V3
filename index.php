@@ -1,6 +1,6 @@
 <?php
 include "classes/methodesUser.php" ;
-
+session_start();
 //------------------Connection-------------------
 
 if (isset($_POST['submitConn'])) {
