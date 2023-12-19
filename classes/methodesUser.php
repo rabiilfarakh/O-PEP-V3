@@ -14,10 +14,9 @@ require_once "bdd.classes.php";
             $stmt->bindParam(4, $pwd);
     
             if($stmt->execute()) {
-                // $idUtl = $pdo->lastInsertId();
-                // session_start();
-                // $_SESSION['idUtl'] = $idUtl;
-                header('location:./../pages/role.php');
+                $idUtl = $pdo->lastInsertId();
+                $_SESSION['idUtl'] = $idUtl;
+                header('location:./../pages/role.php?id='.$idUtl);
                 exit();
             } else {
                 echo "Erreur d'insertion";
@@ -52,10 +51,10 @@ require_once "bdd.classes.php";
         }
         
     
-        public function roleM($role) {
-            // session_start();
+        public function roleM($role){
+            
             $idUtl = isset($_SESSION['idUtl']) ? $_SESSION['idUtl'] : null;
-    
+            
             if ($idUtl) {
                 $pdo = $this->connect();
     
@@ -65,6 +64,7 @@ require_once "bdd.classes.php";
                 $stmt->bindParam(2, $idUtl);
     
                 if($stmt->execute()) {
+                    session_destroy();
                     header('location:./../index.php');
                 } else {
                     echo "Erreur lors de l'ajout du rôle";
