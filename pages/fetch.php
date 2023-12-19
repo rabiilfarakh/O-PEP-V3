@@ -1,8 +1,8 @@
 <?php
 
-require_once "./../classes/getPlantes.classe.php" ;
+require_once "./../classes/plante.classe.php" ;
 
-$objetPlante = new plantes(); 
+$objetPlante = new plante(); 
 
 $idC = $_POST['id'];
 $plantes = $objetPlante->getPlantesInCategories($idC);

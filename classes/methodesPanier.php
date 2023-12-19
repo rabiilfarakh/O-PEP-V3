@@ -56,7 +56,6 @@ class panierM{
                         $panier["nomPlante"],
                         $panier["imagePlante"],
                         $panier["descriptionPlante"],
-                        $panier["stock"],
                         $panier["prix"],
                         $panier["idCategorie"],
                         $panier["idPanier"],

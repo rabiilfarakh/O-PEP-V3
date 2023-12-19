@@ -1,12 +1,13 @@
 <?php
 require_once "./../classes/methodesPanier.php" ;
-require_once "./../classes/getPlantes.classe.php" ;
-require_once "./../classes/getCategories.classe.php" ;
+// require_once "./../classes/getPlantes.classe.php" ;
+require_once "./../classes/categorie.classe.php" ;
+require_once "./../classes/plante.classe.php" ;
 session_start();
 
-$objetPlantes = new plantes(); 
+$objetPlantes = new plante(); 
 $objetPanier = new panierM(); 
-$objetCategories = new categories();
+$objetCategories = new categorie();
 if(isset($_POST['addToCart'])){
     $idP = $_POST['addToCart'];
     $objetPanier->ajouterPlantes_panier($idP);

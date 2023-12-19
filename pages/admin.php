@@ -1,8 +1,10 @@
 <?php
-require_once "./../classes/getPlantes.classe.php" ;
+require_once "./../classes/plante.classe.php" ;
+require_once "./../classes/categorie.classe.php" ;
 require_once "traitement.php";
 
 $objetPlante = new plante();
+$objetCategorie = new categorie(); 
 
 // Ajout de Plante
 if (isset($_POST['submitPlante'])) {
@@ -16,56 +18,36 @@ if (isset($_POST['submitPlante'])) {
     $objetPlante->ajouterPlante($objetPlante);   
 }
 
-
-
-
 // Ajout de catégorie
 if (isset($_POST['submitCategorie'])) {
     
-    $nomCategorie = $_POST['nomCategorie'];
-   
-    $query = "INSERT INTO categories (nomCategorie) VALUES ('$nomCategorie')";
-    $result = $conn->query($query);
- 
+    $objetCategorie->setNom($_POST['nomCategorie']);
 
-        if ($result) {
-            echo "<script>alert('Catégorie ajoutée avec succès.')</script>";
-            echo "<script>setTimeout(function(){ window.location.href = 'admin.php'; }, 1000);</script>";
-        } else {
-            echo "<script>alert('Erreur lors de l'ajout de la catégorie. Veuillez réessayer.')</script>";
-        }
-
+    $objetCategorie->ajouterCategorie($objetCategorie);   
 }
 
 
 // Suppression de plante
 if (isset($_POST['submitSuppressionPlante'])) {
-    $idPlante = $_POST['idPlanteSuppression'];
-    $objetPlante->supprimerPlante($idPlante);
+    $objetPlante->setId($_POST['idPlanteSuppression']);
+    $objetPlante->supprimerPlante($objetPlante);
+
 }
 
 
 // Modification de catégorie
 if (isset($_POST['submitModificationCategorie'])) {
-    
-    $idCategorieModification = $_POST['idCategorieModification'];
-    $nouveauNomCategorie = $_POST['nouveauNomCategorie'];
 
-    $query = "UPDATE categories SET nomCategorie = '$nouveauNomCategorie' WHERE idCategorie = '$idCategorieModification'";
-    $result = $conn->query($query);
+    $objetCategorie->setId($_POST['idCategorieModification']);
+    $objetCategorie->setNom($_POST['nouveauNomCategorie']);
 
-    if ($result) {
-        echo "<script>alert('Catégorie modifiée avec succès.')</script>";
-        echo "<script>setTimeout(function(){ window.location.href = 'admin.php'; }, 1000);</script>";
-    } else {
-        echo "<script>alert('Erreur lors de la modification de la catégorie. Veuillez réessayer.')</script>";
-    }
+    $objetCategorie->modifierCategorie($objetCategorie); 
 }
 
 
 
-//ajouter theme
-// Ajouter un thème
+//Ajouter theme
+
 if (isset($_POST['submitTheme'])) {
     $nomTheme = $_POST['nomTheme'];
     $descriptionTheme = $_POST['descriptionTheme'];
@@ -320,6 +302,30 @@ if (isset($_POST['submitSuppressionArticle'])) {
                 ?>
             </select><br>
             <button id="bttn" type="submit" name="submitSuppressionPlante">Supprimer</button>
+        </form>
+    `;
+}
+// ----------------------------------------------FormulaireModiferCategorie------------------------------------
+function afficherFormulaireModificationCategorie() {
+    var formContainer = document.getElementById("formContainer");
+    formContainer.innerHTML = `
+        <div class="close-button" onclick="fermerFormulaireModificationCategorie()">X</div>
+        <h2>Modifier Catégorie</h2>
+        <form method="POST">
+            <label for="idCategorieModification">Sélectionnez la catégorie à modifier :</label>
+            <select id="idCategorieModification" name="idCategorieModification" class="form-control" required>
+                <?php
+                // Récupérer les catégories depuis la base de données
+                $categoriesQuery = $conn->query("SELECT * FROM categories");
+
+                while ($categorie = $categoriesQuery->fetch_assoc()) {
+                    echo "<option value='{$categorie['idCategorie']}'>{$categorie['nomCategorie']}</option>";
+                }
+                ?>
+            </select><br>
+            <label for="nouveauNomCategorie">Nouveau nom de la catégorie :</label>
+            <input type="text" id="nouveauNomCategorie" name="nouveauNomCategorie" class="form-control" required><br>
+            <button type="submit" name="submitModificationCategorie">Modifier</button>
         </form>
     `;
 }

@@ -1,10 +1,10 @@
 <?php
 session_start();
 require_once "./../classes/methodesPanier.php" ;
-require_once "./../classes/getPlantes.classe.php" ;
+require_once "./../classes/plante.classe.php" ;
 
 $objetPanier = new panierM();
-$objetPlantes = new plantes(); 
+$objetPlantes = new plante(); 
 
 if(isset($_POST['supprimerPanier'])){
     $idPanier = $_POST['idpanier'];
@@ -45,7 +45,7 @@ if(isset($_POST['commander'])){
                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                         <!-- Image -->
                         <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                            <img src="./../<?php echo $pan->getImg() ?>"
+                            <img src="./../plantes/<?php echo $pan->getImg() ?>"
                                 class="w-100" alt="<?php echo $pan->getNom(); ?>" />
                             <a href="#!">
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>

@@ -1,9 +1,10 @@
 <?php
 
-require_once "./../classes/getPlantes.classe.php" ;
+require_once "./../classes/plante.classe.php" ;
 
-$objetPlante = new plantes(); 
+$objetPlante = new plante(); 
 
+// $idC = $_POST['id'];
 $plantes = $objetPlante->getPlantes();
 
     $counter = 0;
@@ -15,7 +16,7 @@ $plantes = $objetPlante->getPlantes();
         echo '<div class="col-md-4 mb-4">';
         echo '<div class="card">';
         echo '<div class="d-flex justify-content-center">';
-        echo '<img " src="./../' . $plante->getImg() . '" class="card-img-top card-img-custom" alt="' . $plante->getNom() . '">';
+        echo '<img " src="./../plantes/' . $plante->getImg() . '" class="card-img-top card-img-custom" alt="' . $plante->getNom() . '">';
         echo '</div>';
         echo '<div class="card-body">';
         echo '<h5 class="card-title">' . $plante->getNom() . '</h5>';
@@ -23,7 +24,7 @@ $plantes = $objetPlante->getPlantes();
         echo '<div class="text-left">';
         echo '<p class="card-text mb-2"><strong>Description:</strong> <span style="color:black;">' . $plante->getDescription() . '</span></p>';
         echo '<p class="card-text mb-2"><strong>Price:</strong> <span style="color:black;">' . $plante->getPrix() . 'DH </span></p>';
-        echo '<p class="card-text mb-2"><strong>Stock:</strong> <span style="color:black;">' . $plante->getStock() . '</span></p>';
+        echo '<p class="card-text mb-2"><strong>Stock:</strong> <span style="color:black;">Ilimité</span></p>';
         echo '</div>';
         echo '<div class="d-flex justify-content-center">';
         //---------------------------------- form-btn--------------------------------------
@@ -52,4 +53,5 @@ $plantes = $objetPlante->getPlantes();
         echo '</div>';
     }                   
     echo $out;
+
 ?>

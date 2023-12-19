@@ -4,13 +4,12 @@ class panier{
     private $nom;
     private $img;
     private $description;
-    private $stock;
     private $prix;
     private $idC;
     private $idPanier;
     private $idUtl;
 
-    public function  __construct($idPlante,$nom,$img,$description,$stock,$prix,$idC,$idPanier,$idUtl)
+    public function  __construct($idPlante,$nom,$img,$description,$prix,$idC,$idPanier,$idUtl)
     {
         $this->idPlante = $idPlante;
         $this->nom = $nom;
@@ -18,7 +17,6 @@ class panier{
         $this->idUtl = $idUtl;
         $this->img = $img;
         $this->description = $description;
-        $this->stock = $stock;
         $this->prix = $prix;
         $this->idC = $idC;
     } 
@@ -41,9 +39,6 @@ class panier{
     }
     public function getDescription(){
         return $this->description;
-    }
-    public function getStock(){
-        return $this->stock;
     }
     public function getPrix(){
         return $this->prix;
